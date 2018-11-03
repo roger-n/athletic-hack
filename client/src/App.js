@@ -40,9 +40,13 @@ class App extends Component {
           <h1 className="App-title">Athletic Hack</h1>
         </header>
         <div className="App-div">
-            <VersionTable onVersionClick={this.handleVersionClick}
-                          versions={this.state.versions}/>
-            <UI onSaveClick={this.handleSaveClick}/>
+            <div className="Version-table">
+                <VersionTable onVersionClick={this.handleVersionClick}
+                              versions={this.state.versions}/>
+            </div>
+            <div className="UI">
+                <UI onSaveClick={this.handleSaveClick}/>
+            </div>
         </div>
       </div>
     );
