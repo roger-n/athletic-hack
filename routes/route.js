@@ -9,9 +9,9 @@ router.get('/',(req,res)=>
 })
 
 router.post('/save',(req,res)=>{
-  console.log(req);
+  console.log(req.body);
     res.send("Saved")
-};
+});
 
 
 module.exports = router;
