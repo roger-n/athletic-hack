@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import logo from './logo.png';
 import './App.css';
 import VersionTable from './components/versionTable';
@@ -56,12 +57,16 @@ class App extends Component {
         const versions = this.state.versions.filter(v => v.id !== versionID);
         this.setState({ versions })
         //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
-    }
+    };
 
     handleSaveClick = (name, tempCoords) => {
+        console.log('Help');
+        axios.post('localhost:5000/save', name, tempCoords)
+            .then(()=>{console.log("Posted to server")
+        });
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
-    }
+    };
 }
 
 export default App;
