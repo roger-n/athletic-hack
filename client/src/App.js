@@ -15,13 +15,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-<<<<<<< HEAD
           <VersionTable/>
-          <h1 className="App-title">React Express Starter</h1>
-=======
+
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Athletic Hack</h1>
->>>>>>> 874772f57655b2fb1adf8ac9a5e4d620751baaf3
         </header>
         <Customers />
       </div>
