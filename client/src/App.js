@@ -4,7 +4,7 @@ import './App.css';
 import Customers from './components/customers';
 import VersionTable from './components/versionTable';
 
-class App extends Component {
+class App extends Component { 
 
     state = {
         canvasID: "newCanvas",
