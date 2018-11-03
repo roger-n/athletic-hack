@@ -1,7 +1,4 @@
 /node_modules
 package-lock.json
-<<<<<<< HEAD
 .env
-=======
->>>>>>> 8459b10eb45046e82c86e9ec6f95051e76c721ad
 .idea/workspace.xml

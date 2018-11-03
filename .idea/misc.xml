@@ -2,9 +2,13 @@
 <project version="4">
   <component name="JavaScriptSettings">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="languageLevel" value="ES6" />
 =======
     <option name="languageLevel" value="JSX" />
 >>>>>>> 8459b10eb45046e82c86e9ec6f95051e76c721ad
+=======
+    <option name="languageLevel" value="JSX" />
+>>>>>>> d68cc0888cbfc2e1013f2afe3fd35869d87fb041
   </component>
 </project>
