@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
-import Customers from './components/customers';
 import VersionTable from './components/versionTable';
 
-class App extends Component { 
+class App extends Component {
 
     state = {
         canvasID: "newCanvas",
-        coordinates: []
+        coordinates: [],
+        versions: [
+            { id: 0, name: 'John Doe', coordList: [ { x: 1, y: 3 }, { x: 2, y: 4 } ] },
+            { id: 1, name: 'Hailee Peterson', coordList: [ { x: 3, y: 8 }, { x: 1, y: 9 } ] },
+            { id: 2, name: 'Training Dummy', coordList: [ { x: 1, y: 6 }, { x: 6, y: 4 } ] },
+        ]
     }
 
   render() {
@@ -19,11 +23,17 @@ class App extends Component {
           <h1 className="App-title">Athletic Hack</h1>
         </header>
         <div className="App-div">
-            <VersionTable />
+            <VersionTable onVersionClick={this.handleVersionClick}
+                          versions={this.state.versions}/>
         </div>
       </div>
     );
   }
+
+    handleVersionClick = versionID => {
+        const versions = this.state.versions.filter(v => v.id !== versionID);
+        this.setState({ versions })
+    }
 }
 
 export default App;

@@ -8,7 +8,7 @@ class Version extends Component {
         return (
             <div>
                 <button className="btn btn-secondary btn-sm m-2"
-                        onClick={() => this.props.onNameClick(id)}> {name} </button>
+                        onClick={() => this.props.onVersionClick(id)}> {name} </button>
             </div>
         )
     }
