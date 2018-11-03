@@ -15,12 +15,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <VersionTable/>
-
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Athletic Hack</h1>
         </header>
-        <Customers />
+        <VersionTable />
       </div>
     );
   }

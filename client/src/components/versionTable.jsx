@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Version from 'version';
+import Version from './version';
 
 class VersionTable extends Component {
     state = {
