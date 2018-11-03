@@ -7,7 +7,7 @@ class Version extends Component {
         const { id, name } = this.props.version;
         return (
             <div>
-                <button className="btn btn-secondary btn-sm m-2"
+                <button className="btn btn-secondary btn-lg m-2"
                         onClick={() => this.props.onVersionClick(id)}> {name} </button>
             </div>
         )

@@ -9,9 +9,21 @@ const playerSchema= mongoose.Schema({
     ,coordList:[{
         x: Number,
         y: Number
+    }],
+    avgStuff:[{
+        avgPoint:{
+            x:Number,
+            y:Number
+        },
+        point1:{
+            x:Number,
+            y:Number
+        },
+        point2:{
+            x:Number,
+            y:Number
+        }
     }]
-
-
 });
 let Player = mongoose.model('PlayerData',playerSchema);
 Player.find().limit(1).exec(function(err, dbUsers) {
@@ -30,5 +42,24 @@ Player.find().limit(1).exec(function(err, dbUsers) {
     }
 });
 
+function findAvgPoint(PlayerName) {
+    let avgX = 0;
+    let avgY = 0;
+    Player.findOne({name: PlayerName}).exec((err,results)=>{
+            if (err)
+                console.log(err);
+            else{
+                results.coordList.forEach((element)=>
+                {
+                    avgX+=element.x;
+                    avgY+=element.y;
+                });
+                avgX/=results.coordList.length;
+                avgY/=results.coordList.length;
+            }
+        })
+}
 
-module.exports = Player;
+
+module.exports = {Player,
+findAvgPoint};

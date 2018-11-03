@@ -29,12 +29,28 @@ class UI extends Component {
                     </button>
                 </div>
                 <div className="CanvasPart">
-
+                    <div>
+                        <input type="text" onChange={ this.handleChange } />
+                        <input
+                            type="button"
+                            value="Alert the text input"
+                            onClick={this.handleClick}
+                        />
+                    </div>
                 </div>
             </div>
         );
     }
 
+    handleChange = (e) => {
+        const newState = this.state;
+        newState.name = e;
+        this.setState({ input: e.target.value });
+    }
+
+    handleClick = () => {
+        console.log(this.state.input);
+    }
 
 }
 
