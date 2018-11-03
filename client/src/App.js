@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
 import VersionTable from './components/versionTable';
+import UI from './components/UI';
 
 class App extends Component {
 
@@ -25,6 +26,7 @@ class App extends Component {
         <div className="App-div">
             <VersionTable onVersionClick={this.handleVersionClick}
                           versions={this.state.versions}/>
+            <UI onSaveClick={this.handleSaveClick}/>
         </div>
       </div>
     );
