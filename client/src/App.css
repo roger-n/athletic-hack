@@ -4,6 +4,17 @@
 
 .App-div {
   display:flex; flex-direction:row;
+  margin: 2em;
+}
+
+.Version-table {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.UI {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .App-logo {
