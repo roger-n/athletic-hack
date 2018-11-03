@@ -49,6 +49,12 @@ class App extends Component {
     handleVersionClick = versionID => {
         const versions = this.state.versions.filter(v => v.id !== versionID);
         this.setState({ versions })
+        //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
+    }
+
+    handleSaveClick = (name, tempCoords) => {
+        //Push to database a new JSON with name and tempCoords
+        //Set top level state to database get-all request
     }
 }
 
