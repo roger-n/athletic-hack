@@ -1,0 +1,13 @@
+//This file is strictly for testing purposes
+[
+  {
+    "_id": "592735a97bda2a491fe4e812",
+    "name": "Philippe Desrosiers",
+    "coordList":[{"x":1,"y":1},{"x":2,"y":2}]
+  },
+  {
+    "_id": "592735a97bda2a491fe4e813",
+    "name": "Roger Nhan",
+    "coordList":[{"x":1,"y":1},{"x":2,"y":2}]
+  }
+]
