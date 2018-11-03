@@ -9,9 +9,25 @@ class App extends Component {
         canvasID: "newCanvas",
         coordinates: [],
         versions: [
-            { id: 0, name: 'John Doe', coordList: [ { x: 1, y: 3 }, { x: 2, y: 4 } ] },
-            { id: 1, name: 'Hailee Peterson', coordList: [ { x: 3, y: 8 }, { x: 1, y: 9 } ] },
-            { id: 2, name: 'Training Dummy', coordList: [ { x: 1, y: 6 }, { x: 6, y: 4 } ] },
+            { id: 0,
+                name: 'John Doe',
+                coordList: [ { x: 1, y: 3 }, { x: 2, y: 4 } ],
+                avgPoint: {x: 2, y: 3},
+                point1: {x: 6, y: 4},
+                point2: {x: 8, y: 4}
+                },
+            { id: 1,
+                name: 'Hailee Peterson',
+                coordList: [ { x: 3, y: 8 }, { x: 1, y: 9 } ],
+                avgPoint: {x: 2, y: 3},
+                point1: {x: 6, y: 4},
+                point2: {x: 8, y: 4} },
+            { id: 2,
+                name: 'Training Dummy',
+                coordList: [ { x: 1, y: 6 }, { x: 6, y: 4 } ],
+                avgPoint: {x: 2, y: 3},
+                point1: {x: 6, y: 4},
+                point2: {x: 8, y: 4} },
         ]
     }
 
