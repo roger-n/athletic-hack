@@ -2,3 +2,4 @@
 package-lock.json
 .env
 .idea/workspace.xml
+.idea/misc.xml

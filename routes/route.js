@@ -2,10 +2,8 @@ const express = require('express');
 let router = express.Router();
 const DBController = require('./DBController');
 
-
-router.use('/',(req,res)=>{
-    res.send("Properly redirected")
-});
-
+/*router.get('*',(req,res)=>{
+    res.sendFile('../public/client/index.html');
+});*/
 
 module.exports = router;
