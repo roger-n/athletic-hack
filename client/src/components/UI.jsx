@@ -25,7 +25,7 @@ class UI extends Component {
                     <button
                         className="btn btn-primary m-2"
                         onClick={() => (this.props.onSaveClick(this.state.name, this.state.tempArray))}>
-                        Submit
+                        Save
                     </button>
                 </div>
                 <div className="CanvasPart">

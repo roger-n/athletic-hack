@@ -9,7 +9,7 @@ router.get('/',(req,res)=>
 })
 
 router.post('/save',(req,res)=>{
-  console.log(req);
+    console.log("Post request has been sent")
     res.send("Saved")
 });
 
