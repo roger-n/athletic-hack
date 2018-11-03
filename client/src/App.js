@@ -18,7 +18,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Athletic Hack</h1>
         </header>
-        <VersionTable />
+        <div className="App-div">
+            <VersionTable />
+        </div>
       </div>
     );
   }
