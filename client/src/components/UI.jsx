@@ -25,7 +25,7 @@ class UI extends Component {
                     <button
                         className="btn btn-primary"
                         onClick={() => (this.props.onSaveClick(this.state.name, this.state.tempArray))}>
-                        Save
+                        Submit
                     </button>
                 </div>
                 <div className="CanvasPart">
@@ -42,12 +42,12 @@ class UI extends Component {
         );
     }
 
-    handleChange = (e) => {
-        const newState = this.state;
-        newState.name = e.target.name;
-        console.log(e.target.name);
-        console.log(this.state.name);
+    handleChange = (e)   => {
+        let newState = {...this.state};
+        newState.name = e.target.id;
         this.setState(newState);
+        console.log(e.target);
+        console.log(this.state.name);
     }
 
     handleClick = () => {
