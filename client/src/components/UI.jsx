@@ -24,7 +24,7 @@ class UI extends Component {
                 <div className="TopPart">
                     <button
                         className="btn btn-primary"
-                        onClick={() => (this.props.handleSaveClick(this.state.name, this.state.tempArray))}>
+                        onClick={() => (this.props.onSaveClick(this.state.name, this.state.tempArray))}>
                         Submit
                     </button>
                 </div>
