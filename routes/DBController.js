@@ -31,13 +31,13 @@ function updateData(id) {
     Player.findById(id.toString()).exec((err,results)=>{
         results.avgPoint = getAvgPoint(results.coordList);
         console.log("RESULTS AVGPOINT SHOULD BE:",results.avgPoint);
-        let length = getStandardDev(results.coordList);
+        let length = 2 * getStandardDev(results.coordList);
         let radius = findRadius(results.avgPoint);
         let a = getA(radius, length);
         let b = getB(radius, a);
         results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
         results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
-        results.stdDeviation = length*2;
+        results.stdDeviation = length;
         return results.save()
     })/*.catch((err)=>{console.log(err)})*/
     /*.exec((err,results) => {
