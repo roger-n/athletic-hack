@@ -13,9 +13,6 @@ class UI extends Component {
     }
 
     render () {
-
-        console.log(this.props);
-
         return (
             <div className="UI">
                 <div className="Top-part">
