@@ -29,16 +29,43 @@ let Player = mongoose.model('PlayerData',playerSchema,'playerdatas');
 
 function updateData(id) {
     Player.findById(id.toString()).exec((err,results)=>{
-        results.avgPoint = getAvgPoint(results.coordList);
-        console.log("RESULTS AVGPOINT SHOULD BE:",results.avgPoint);
-        let length = 2 * getStandardDev(results.coordList);
-        let radius = findRadius(results.avgPoint);
-        let a = getA(radius, length);
-        let b = getB(radius, a);
-        results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
-        results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
-        results.stdDeviation = length;
-        return results.save()
+        console.log('these are the results');
+        console.log(results);
+
+
+        let callback = (newResultsCoords) => {
+            results.avgPoint = getAvgPoint(newResultsCoords);
+            console.log("RESULTS AVGPOINT SHOULD BE:",results.avgPoint);
+            let length = 2 * getStandardDev(newResultsCoords);
+            console.log("STANDARD DEVIATION SHOULD BE", length / 2)
+            let radius = findRadius(results.avgPoint);
+            let a = getA(radius, length);
+            let b = getB(radius, a);
+            results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+            results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+            results.stdDeviation = length;
+            return results.save()
+        }
+
+        let resultsLeft = results.coordList.length;
+
+        let newResultsCoords = [];
+        results.coordList.forEach(result => {
+            console.log('checking' + result.x + ', ' + result.y);
+            if ((Math.sqrt(Math.pow(result.x - .28, 2) + Math.pow(result.y - .28, 2)))
+                > 0.4){
+                console.log('passed')
+                newResultsCoords.push(result)
+            }
+            resultsLeft--;
+            console.log(resultsLeft);
+            if(resultsLeft === 0) {
+                callback(newResultsCoords);
+            }
+        })
+
+
+
     })/*.catch((err)=>{console.log(err)})*/
     /*.exec((err,results) => {
         if(err)
@@ -79,6 +106,8 @@ function findRadius(coords){
 }
 
 function getStandardDev(coordsList){
+    console.log('standard dev coords: ' + coordsList + ' end')
+    //console.log
     return math.std(coordsList.map(element=> (element.x)
     ),coordsList.map(element=>(element.y)))
 }
