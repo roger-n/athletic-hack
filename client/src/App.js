@@ -78,6 +78,7 @@ class App extends Component {
                 let newState = {...this.state};
                 newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
                 this.setState(newState);
+                this.refs.myUI.reDraw();
         });
 
         //Push to database a new JSON with name and tempCoords
