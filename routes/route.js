@@ -35,6 +35,7 @@ router.get('/players',(req,res)=>{
 router.get('/players/:id',(req,res)=>{
     DBController.updateData(req.params.id)
     DBController.Player.findById(req.params.id).then((results)=>{
+        console.log(results)
         res.send(results)
 
     })
