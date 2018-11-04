@@ -10,7 +10,6 @@ const playerSchema= mongoose.Schema({
         x: Number,
         y: Number
     }],
-    avgStuff:[{
         avgPoint:{
             x:Number,
             y:Number
@@ -23,7 +22,6 @@ const playerSchema= mongoose.Schema({
             x:Number,
             y:Number
         }
-    }]
 });
 let Player = mongoose.model('PlayerData',playerSchema);
 Player.find().limit(1).exec(function(err, dbUsers) {
@@ -49,17 +47,27 @@ function findAvgPoint(PlayerName) {
             if (err)
                 console.log(err);
             else{
-                results.coordList.forEach((element)=>
+               results.coordList.forEach((element)=>
                 {
                     avgX+=element.x;
                     avgY+=element.y;
                 });
                 avgX/=results.coordList.length;
                 avgY/=results.coordList.length;
+               results.avgPoint = {
+                   x:avgX,
+                   y:avgY
+               }
+               return results.save()
             }
         })
 }
-
-
+//Helper functions
+function findRadius(playerName){
+    Player.findOne({name: playerName}).exec((results)=>{
+        let radius = Math.sqrt(Math.pow(results.avgPoint.x,2)+Math.pow(results.avgPoint.y,2))
+        return radius
+    })
+}
 module.exports = {Player,
 findAvgPoint};

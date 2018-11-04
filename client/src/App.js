@@ -61,27 +61,12 @@ class App extends Component {
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Help');
-        this.postNameAndTempCoords(name, tempCoords);
+        axios.post('http://localhost:5000/save', name, tempCoords)
+            .then(()=>{console.log("Posted to server")
+        });
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
     };
-
-    postNameAndTempCoords = (name, tempCoords) => {
-        let dataBody = {
-            "name": name,
-            "tempCoords": tempCoords
-        };
-
-        return fetch('http://localhost:5000/save', {
-            method: 'POST',
-            body: JSON.stringify(dataBody),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then(data => console.log(data));
-    }
 }
 
 export default App;
