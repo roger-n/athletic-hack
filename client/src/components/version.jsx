@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./version.css"
+
 
 class Version extends Component {
 
@@ -7,8 +9,9 @@ class Version extends Component {
         const { _id, name } = this.props.version;
         return (
             <div>
-                <button className="btn btn-secondary btn-lg m-2"
+                <button className="btn btn-secondary btn-lg m-2 Constant-width"
                         onClick={() => this.props.onVersionClick(_id)}> {name} </button>
+                <button className="btn btn-danger btn-lg">Delete</button>
             </div>
         )
     }
