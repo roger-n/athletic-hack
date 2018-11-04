@@ -17,6 +17,7 @@ class Canvas extends Component {
         coords.y = (canvasSize - coords.y) / canvasSize
         //TODO make this do stuff with DB
         //console.log(this.pros);
+
         this.props.coordList.push({x: coords.x, y: coords.y})
         //console.log(coords.x)
         //console.log(coords.y)
@@ -37,7 +38,19 @@ class Canvas extends Component {
         })
     }
 
+    pointIsInfield = (element, callback) => {
+        //If element in coordList is under radius r, add it to infield
+        if(
+            (Math.sqrt(Math.pow(element.x - .28, 2) + Math.pow(element.y - .28, 2)))
+            < 0.4){
+            callback(true);
+        }
+    }
+
     reDrawWithData = () => {
+        //Making array of infield points
+        let infieldPoints = [];
+
         console.log('actually redrawing with data');
         console.log(this.props.currentVersion)
         const ctx = this.refs.myCanvas.getContext("2d");
@@ -48,6 +61,15 @@ class Canvas extends Component {
 
         //console.log(this.props.coordList)
         this.props.coordList.forEach((element)=>{
+
+            //If element in coordList is under radius r, add it to infield
+            this.pointIsInfield(element, (isInField) => {
+                if (isInField) {
+                    infieldPoints.push({x: element.x, y:element.y})
+                }
+            })
+
+
             //console.log(element.x)
             //console.log(element.y)
             ctx.fillStyle="#FF0000";
@@ -106,10 +128,89 @@ class Canvas extends Component {
                         -59/128 * Math.PI,
                         -3/64 * Math.PI)
                     ctx4.stroke();
+
+                    //Add infield coords
+                    setTimeout(() => {
+
+
+                        console.log('starting paint of inner')
+                        console.log(infieldPoints)
+                        this.doAveragesOfInField(infieldPoints, this.doStuffWithAverages);
+                    }, 100);
                 }, 100);
-            }, 100)
+            }, 100);
         }, 100);
     }
+
+    doStuffWithAverages = (topCoords, bottomCoords) =>{
+        console.log('made it to callback1')
+        console.log(topCoords);
+        console.log(bottomCoords);
+        let avgX = 0;
+        let avgY = 0;
+
+        topCoords.forEach((element)=>
+        {
+            avgX+=element.x;
+        });
+        avgX/=topCoords.length;
+        console.log("Average X Coord",avgX);
+
+        bottomCoords.forEach((element)=>
+        {
+            avgY+=element.y;
+        });
+        avgY/=bottomCoords.length;
+
+        console.log("Average Y Coord",avgY);
+
+        const ctx5 = this.refs.myCanvas.getContext("2d");
+
+        ctx5.fillStyle="#006400";
+        ctx5.strokeStyle="#008000";
+        ctx5.lineWidth="8px";
+
+        ctx5.fillRect(avgX * canvasSize,
+                0.47 * canvasSize,
+                10,10);
+        ctx5.fillRect(0.5 * canvasSize,
+                (1- avgY) * canvasSize,
+                10,10);
+
+    }
+
+    doAveragesOfInField = (coords, callback) => {
+
+        console.log('taking averages')
+        console.log(coords)
+        console.log('end coords')
+        let topCoords = [];
+        let bottomCoords = [];
+
+        let elementsLeft = coords.length;
+
+
+        coords.forEach((element)=>
+        {
+            console.log(element)
+            console.log(Math.atan(element.y/element.x))
+            if (Math.atan(element.y/element.x) > Math.PI/4) {
+                topCoords.push(element)
+            } else {
+                bottomCoords.push(element)
+            }
+            console.log('top and bottom coords')
+            console.log(topCoords)
+            console.log(bottomCoords)
+            elementsLeft--;
+            if(elementsLeft === 0) {
+                callback(topCoords, bottomCoords)
+            }
+        });
+
+
+    }
+
 
     getMousePos = (evt) => {
         let rect = this.refs.myCanvas.getBoundingClientRect();
