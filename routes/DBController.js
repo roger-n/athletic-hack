@@ -3,7 +3,7 @@ const math = require('mathjs');
 const playerSchema= mongoose.Schema({
     _id: mongoose.Schema.ObjectId
     ,name: {
-        require:true,
+        required:true,
         type:String
     }
     ,coordList:[{
@@ -102,4 +102,8 @@ function getPoint2(a,c,r,b,d){
 
     return {x,y}
 }
-module.exports = {Player, updateData};
+function makeId()
+{
+    return mongoose.Types.ObjectId;
+}
+module.exports = {Player, updateData,makeId};
