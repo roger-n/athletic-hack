@@ -20,6 +20,7 @@ class UI extends Component {
         ]
     }
 
+<<<<<<< HEAD
     componentDidMount() {
         if (props.currentVersion==null){
             console.log('remounted UI');
@@ -31,6 +32,9 @@ class UI extends Component {
             }
         }
     }
+=======
+
+>>>>>>> 41185a5ab2d7fa44a32b9a4ebfeb2ac4d6b558eb
 
     render () {
         return (
@@ -58,7 +62,6 @@ class UI extends Component {
                     <button
                         className="btn btn-success m-2"
                         onClick={() => (this.props.onNewClick())}>
-                    >
                         New Data Set
                     </button>
                 </div>
