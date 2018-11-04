@@ -20,9 +20,7 @@ class UI extends Component {
         ]
     }
 
-    componentDidMount() {
-        if (isEmptythis.props.currentVersion)
-    }
+
 
     render () {
         return (
@@ -50,7 +48,6 @@ class UI extends Component {
                     <button
                         className="btn btn-success m-2"
                         onClick={() => (this.props.onNewClick())}>
-                    >
                         New Data Set
                     </button>
                 </div>

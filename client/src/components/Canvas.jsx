@@ -7,6 +7,16 @@ class Canvas extends Component {
         super()
         this.myCanvas = React.createRef();
     }
+    //
+    // componentDidMount() {
+    //     console.log('remounted canvas');
+    //     let newState = {...this.props.state};
+    //     if (this.props.props.currentVersion == null) {
+    //         newState.tempArray = [];
+    //     } else {
+    //         newState.tempArray = this.props.currentVersion.coordinates;
+    //     }
+    // }
 
     handleClick = (evt) => {
         console.log("clicked");
