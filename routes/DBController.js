@@ -21,7 +21,7 @@ const playerSchema= mongoose.Schema({
             x:Number,
             y:Number
         },
-    radius:Number
+    stdDeviation:Number
 });
 let Player = mongoose.model('PlayerData',playerSchema,'playerdatas');
 
@@ -37,7 +37,7 @@ function updateData(id) {
         let b = getB(radius, a);
         results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
         results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
-        results.radius = radius
+        results.stdDeviation = length;
         return results.save()
     })/*.catch((err)=>{console.log(err)})*/
     /*.exec((err,results) => {
