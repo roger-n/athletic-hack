@@ -9,10 +9,12 @@ class UI extends Component {
 
     constructor () {
         super()
-        this.myCanvas = React.createRef();
+            this.myCanvas = React.createRef();
     }
 
     render () {
+
+        console.log(this.props);
 
         return (
             <div className="UI">
