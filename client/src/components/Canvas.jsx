@@ -42,6 +42,8 @@ class Canvas extends Component {
         console.log(this.props.currentVersion)
         const ctx = this.refs.myCanvas.getContext("2d");
         const ctx2 = this.refs.myCanvas.getContext("2d");
+        const ctx3 = this.refs.myCanvas.getContext("2d");
+        const ctx4 = this.refs.myCanvas.getContext("2d");
         ctx.clearRect(0, 0, this.refs.myCanvas.width, this.refs.myCanvas.height);
 
         //console.log(this.props.coordList)
@@ -55,7 +57,7 @@ class Canvas extends Component {
         setTimeout(() => {
             console.log('trying to add data')
             ctx2.fillStyle="#0000FF";
-            ctx2.strokeStyle="#4B0082\t ";
+            ctx2.strokeStyle="#008000";
             ctx2.lineWidth="8px"
 
             ctx2.fillRect(this.props.currentVersion.avgPoint.x * canvasSize,
@@ -67,24 +69,46 @@ class Canvas extends Component {
             ctx2.fillRect(this.props.currentVersion.point2.x * canvasSize,
                 (1 - this.props.currentVersion.point2.y) * canvasSize,
                 10,10);
-            ctx2.beginPath();
-            ctx2.arc(this.props.currentVersion.avgPoint.x * canvasSize,
-                (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
-                this.props.currentVersion.stdDeviation / 2 * canvasSize,
-                0,
-                2*Math.PI)
-            // ctx2.arc(0 * 400,
-            //     (1 ) * 400,
-            //     Math.sqrt(
-            //         Math.pow(this.props.currentVersion.avgPoint.x, 2) +
-            //         Math.pow(this.props.currentVersion.avgPoint.y, 2)
-            //     ) * 400,
-            //     0,
-            //     2 *Math.PI)
-            ctx2.stroke();
-        }, 500)
 
+            setTimeout(() => {
+                ctx3.strokeStyle="#FFFFFF";
+                ctx3.globalAlpha = 0.7
+                ctx3.lineWidth="8px"
+                var grd=ctx.createRadialGradient(
+                    this.props.currentVersion.avgPoint.x * canvasSize,
+                    (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
+                    5,
+                    this.props.currentVersion.avgPoint.x * canvasSize,
+                    (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
+                    this.props.currentVersion.stdDeviation / 2 * canvasSize);
+                grd.addColorStop(0,"red");
+                grd.addColorStop(1,"white");
+                ctx.fillStyle=grd;
 
+                ctx3.beginPath();
+                ctx3.arc(this.props.currentVersion.avgPoint.x * canvasSize,
+                    (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
+                    this.props.currentVersion.stdDeviation / 2 * canvasSize,
+                    0,
+                    2*Math.PI);
+                ctx3.stroke();
+                ctx3.fill();
+                setTimeout(() => {
+                    ctx4.strokeStyle="#0FB8F9";
+                    ctx4.lineWidth=4;
+                    ctx4.beginPath();
+                    ctx4.arc(0,
+                        (1 ) * canvasSize,
+                        Math.sqrt(
+                            Math.pow(this.props.currentVersion.avgPoint.x, 2) +
+                            Math.pow(this.props.currentVersion.avgPoint.y, 2)
+                        ) * canvasSize,
+                        -59/128 * Math.PI,
+                        -3/64 * Math.PI)
+                    ctx4.stroke();
+                }, 100);
+            }, 100)
+        }, 100);
     }
 
     getMousePos = (evt) => {
