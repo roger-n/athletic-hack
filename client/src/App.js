@@ -9,12 +9,9 @@ class App extends Component {
 
     constructor () {
         super()
-        this.reDraw();
+        this.myUI = React.createRef();
     }
-
-    reDraw = () => {
-
-    }
+    
 
     state = {
         canvasID: "newCanvas",
@@ -38,7 +35,8 @@ class App extends Component {
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
-                <UI onSaveClick={this.handleSaveClick}
+                <UI ref="myUI"
+                    onSaveClick={this.handleSaveClick}
                     onNewClick = {this.handleNewClick}
                     currentVersion = {this.state.currentVersion}/>
             </div>
@@ -79,10 +77,15 @@ class App extends Component {
         let currentVersion = {...this.state.currentVersion};
         currentVersion.coordList.length = 0;
         this.setState({currentVersion});
-        this.refs.myUI.refs.myCanvas.reDraw()
         console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
+        this.refs.myUI.reDraw();
+
     }
+
+    // reDraw = () => {
+    //     this.refs.myUI.reDraw();
+    // }
 }
 
 export default App;
