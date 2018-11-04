@@ -6,6 +6,12 @@ import Canvas from './Canvas'
 
 class UI extends Component {
 
+
+    constructor () {
+        super()
+        this.myCanvas = React.createRef();
+    }
+
     render () {
 
         return (
@@ -36,10 +42,15 @@ class UI extends Component {
                     </button>
                 </div>
                 <div className="CanvasPart">
-                    <Canvas coordList={this.props.currentVersion.coordList}/>
+                    <Canvas ref="myCanvas" coordList={this.props.currentVersion.coordList}/>
                 </div>
             </div>
         );
+    }
+
+    reDraw = () => {
+        console.log('trying to redraw from UI')
+        this.refs.myCanvas.reDraw();
     }
 }
 

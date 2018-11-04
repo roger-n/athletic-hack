@@ -7,6 +7,11 @@ import UI from './components/UI';
 
 class App extends Component {
 
+    constructor () {
+        super()
+        this.myUI = React.createRef();
+    }
+
     state = {
         canvasID: "newCanvas",
         coordinates: [],
@@ -29,7 +34,8 @@ class App extends Component {
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
-                <UI onSaveClick={this.handleSaveClick}
+                <UI ref="myUI"
+                    onSaveClick={this.handleSaveClick}
                     onNewClick = {this.handleNewClick}
                     currentVersion = {this.state.currentVersion}/>
             </div>
@@ -69,11 +75,16 @@ class App extends Component {
         console.log('New Button Clicked');
         let currentVersion = {...this.state.currentVersion};
         currentVersion.coordList.length = 0;
-        this.reDraw();
         this.setState({currentVersion});
         console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
+        this.refs.myUI.reDraw();
+
     }
+
+    // reDraw = () => {
+    //     this.refs.myUI.reDraw();
+    // }
 }
 
 export default App;
