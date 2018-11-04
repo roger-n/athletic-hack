@@ -12,6 +12,7 @@ class VersionTable extends Component {
                 {versions.map(version => (
                     <Version key={version.id}
                              onVersionClick={_id => this.props.onVersionClick(_id)}
+                             onDeleteClick={_id => this.props.onDeleteClick(_id)}
                              version={ version }/>
                 ))}
             </div>

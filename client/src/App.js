@@ -45,6 +45,7 @@ class App extends Component {
         <div className="App-div">
             <div className="Version-table">
                 <VersionTable onVersionClick={this.handleVersionClick}
+                              onDeleteClick={this.handleDeleteClick}
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
@@ -64,6 +65,10 @@ class App extends Component {
       this.setState({ versions })
         //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
     };
+
+    handleDeleteClick = versionID => {
+        console.log("Handling Delete Click");
+    }
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');

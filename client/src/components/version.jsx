@@ -10,8 +10,9 @@ class Version extends Component {
         return (
             <div>
                 <button className="btn btn-secondary btn-lg m-2 Constant-width"
-                        onClick={() => this.props.onVersionClick(_id)}> {name} </button>
-                <button className="btn btn-danger btn-lg">Delete</button>
+                        onClick={() => this.props.onVersionClick(_id)}>{name}</button>
+                <button className="btn btn-danger btn-lg"
+                        onClick={() => this.props.onDeleteClick(_id)}>Delete</button>
             </div>
         )
     }
