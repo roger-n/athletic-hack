@@ -8,7 +8,7 @@ class UI extends Component {
 
     state = {
         name: '',
-        tempArray: [
+        tempArray: [{/*
             {x: 0.5, y: 0.8},
             {x: 0.6, y: 0.3},
             {x: 0.4, y: 0.6},
@@ -17,7 +17,7 @@ class UI extends Component {
             {x: 0.7, y: 0.4},
             {x: 0.5, y: 0.2},
             {x: 0.3, y: 0.7},
-        ]
+        */}]
     }
 
 
