@@ -24,6 +24,7 @@ router.post('/save',(req,res)=>{
 router.post('/delete/:id',(req,res)=>{
     DBController.Player.findByIdAndDelete(req.params.id).then(()=>{
         console.log("Deleted entry")
+        res.send("Deleted")
     })
 });
 router.get('/players',(req,res)=>{
@@ -35,6 +36,7 @@ router.get('/players',(req,res)=>{
 router.get('/players/:id',(req,res)=>{
     DBController.updateData(req.params.id)
     DBController.Player.findById(req.params.id).then((results)=>{
+        console.log(results)
         res.send(results)
 
     })

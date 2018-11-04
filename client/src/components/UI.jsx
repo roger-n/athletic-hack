@@ -47,7 +47,9 @@ class UI extends Component {
                     </button>
                 </div>
                 <div className="CanvasPart">
-                    <Canvas ref="myCanvas" coordList={this.props.currentVersion.coordList}/>
+                    <Canvas ref="myCanvas"
+                            coordList={this.props.currentVersion.coordList}
+                            currentVersion = {this.props.currentVersion}/>
                 </div>
             </div>
         );
@@ -63,6 +65,11 @@ class UI extends Component {
     reDraw = () => {
         console.log('trying to redraw from UI')
         this.refs.myCanvas.reDraw();
+    }
+
+    reDrawWithData = () => {
+        console.log('trying to redraw with data')
+        this.refs.myCanvas.reDrawWithData();
     }
 }
 
