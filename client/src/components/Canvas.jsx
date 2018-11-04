@@ -9,15 +9,15 @@ class Canvas extends Component {
     }
 
     handleClick = (evt) => {
-        console.log("clicked");
+        console.log("Canvas clicked");
         let coords = this.getMousePos(evt)
         coords.x = coords.x / 400
         coords.y = (400 - coords.y) / 400
         //TODO make this do stuff with DB
-        console.log(this.props);
+        //console.log(this.props);
         this.props.coordList.push({x: coords.x, y: coords.y})
-        console.log(coords.x)
-        console.log(coords.y)
+        //console.log(coords.x)
+        //console.log(coords.y)
         this.reDraw();
     };
 
@@ -26,10 +26,10 @@ class Canvas extends Component {
         const ctx = this.refs.myCanvas.getContext("2d");
         ctx.clearRect(0, 0, this.refs.myCanvas.width, this.refs.myCanvas.height);
 
-        console.log(this.props.coordList)
+        //console.log(this.props.coordList)
         this.props.coordList.forEach((element)=>{
-            console.log(element.x)
-            console.log(element.y)
+            //console.log(element.x)
+            //console.log(element.y)
             ctx.fillStyle="#FF0000";
             ctx.fillRect(element.x * 400, (1 - element.y) * 400,6,6);
         })

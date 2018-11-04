@@ -68,7 +68,7 @@ class App extends Component {
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
         console.log(name)
-        console.log(tempCoords)
+        //console.log(tempCoords)
       
         axios.post('http://localhost:5000/save', {
             name: name,
@@ -79,16 +79,15 @@ class App extends Component {
                 newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null, radius: null};
                 this.setState(newState);
                 this.refs.myUI.reDraw();
-        });
+                axios.get('http://localhost:5000/players')
+                    .then(results => {
+                            this.setState( {versions: results.data} )
+                        }
+                    )})
 
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
 
-        axios.get('http://localhost:5000/players')
-            .then(results => {
-                this.setState( {versions: results.data} )
-                }
-            )
     };
 
     handleNewClick = () => {
