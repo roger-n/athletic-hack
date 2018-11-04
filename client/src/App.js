@@ -60,28 +60,28 @@ class App extends Component {
   }
 
     handleVersionClick = versionID => {
-      console.log('Handling Version Click');
-      const versions = this.state.versions.filter(v => v._id !== versionID);
-      this.setState({ versions })
+      //console.log('Handling Version Click');
+      //const versions = this.state.versions.filter(v => v._id !== versionID);
+      //this.setState({ versions })
         //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
     };
 
-    handleDeleteClick = versionID => {
+    handleDeleteClick = (versionID) => {
         console.log('Handling Delete Click');
+        console.log(versionID);
         axios.post('http://localhost:5000/delete/' + versionID)
-            .then(()=> {
-                console.log('Deleted from server');
+            .then((arg)=> {
+                console.log("Deleted from server");
                 axios.get('http://localhost:5000/players')
                     .then(results => {
-                        this.setState( {version: results.data})
-                    })
-            })
+                        this.setState( {versions: results.data} )
+                    })})
     };
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
         console.log(name)
-        //console.log(tempCoords)
+        //console.log
       
         axios.post('http://localhost:5000/save', {
             name: name,
@@ -95,8 +95,7 @@ class App extends Component {
                 axios.get('http://localhost:5000/players')
                     .then(results => {
                             this.setState( {versions: results.data} )
-                        }
-                    )})
+                    })})
 
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
