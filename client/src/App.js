@@ -13,7 +13,7 @@ class App extends Component {
 
         versions: [],
 
-        currentVersion: null
+        currentVersion: {}
     };
 
   render() {
@@ -67,10 +67,9 @@ class App extends Component {
 
     handleNewClick = () => {
         console.log('New Button Clicked');
-        let newState = {...this.state};
-        newState.currentVersion = null;
-        this.setState(newState);
-        console.log('currentState set to null object');
+        let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+        this.setState({currentVersion});
+        console.log('currentVersion objects set to null');
     }
 }
 
