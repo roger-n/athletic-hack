@@ -20,6 +20,10 @@ class UI extends Component {
         ]
     }
 
+    componentDidMount() {
+        if (isEmptythis.props.currentVersion)
+    }
+
     render () {
         return (
             <div className="UI">
@@ -43,11 +47,12 @@ class UI extends Component {
                             aria-describedby="basic-addon1"/>
                     </div>
                     {/*Testing button click to to function*/}
-                    <input
-                        type="button"
-                        value="Alert the text input"
-                        onClick={this.handleClick}
-                    />
+                    <button
+                        className="btn btn-success m-2"
+                        onClick={() => (this.props.onNewClick())}>
+                    >
+                        New Data Set
+                    </button>
                 </div>
                 <div className="CanvasPart">
                     <Canvas tempArray={this.state.tempArray}/>
