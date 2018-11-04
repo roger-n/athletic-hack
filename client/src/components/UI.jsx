@@ -16,7 +16,7 @@ class UI extends Component {
     }
 
     render () {
-        
+
         return (
             <div className="UI">
                 <div className="Top-part">
