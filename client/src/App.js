@@ -8,11 +8,9 @@ import UI from './components/UI';
 class App extends Component {
 
   state = {
-      canvasID: "newCanvas",
-
+      canvasID: "",
       versions: [],
-
-      currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
+      currentVersion: {}
   };
 
   constructor () {
@@ -22,16 +20,18 @@ class App extends Component {
 
   componentDidMount() {
 
+      console.log('Component Mounted');
+
       let canvasID = "newCanvas";
-      this.setState({canvasID})
+      this.setState({canvasID});
 
       axios.get('http://localhost:5000/players')
           .then(results => {
                   this.setState( {versions: results.data} )
               }
-          )
+          );
 
-      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null, radius: null};
       this.setState({currentVersion})
   }
 
@@ -51,7 +51,6 @@ class App extends Component {
                 <UI ref="myUI"
                     onSaveClick={this.handleSaveClick}
                     onNewClick = {this.handleNewClick}
-                    onNameChange = {this.handleNameChange()}
                     currentVersion = {this.state.currentVersion}/>
             </div>
         </div>
@@ -74,7 +73,7 @@ class App extends Component {
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
-                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null, radius: null};
                 this.setState(newState);
                 this.refs.myUI.reDraw();
         });

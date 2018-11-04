@@ -4,6 +4,8 @@ import Version from './version';
 class VersionTable extends Component {
 
     render() {
+        console.log('Rendering Version Table');
+        console.log(this.props.versions);
         const { versions } = this.props;
         return (
             <div>
