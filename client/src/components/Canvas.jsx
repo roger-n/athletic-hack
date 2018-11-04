@@ -7,16 +7,6 @@ class Canvas extends Component {
         super()
         this.myCanvas = React.createRef();
     }
-    //
-    // componentDidMount() {
-    //     console.log('remounted canvas');
-    //     let newState = {...this.props.state};
-    //     if (this.props.props.currentVersion == null) {
-    //         newState.tempArray = [];
-    //     } else {
-    //         newState.tempArray = this.props.currentVersion.coordinates;
-    //     }
-    // }
 
     handleClick = (evt) => {
         console.log("clicked");
@@ -24,7 +14,8 @@ class Canvas extends Component {
         coords.x = coords.x / 400
         coords.y = (400 - coords.y) / 400
         //TODO make this do stuff with DB
-        this.props.tempArray.push({x: coords.x, y: coords.y})
+        console.log(this.props);
+        this.props.coordList.push({x: coords.x, y: coords.y})
         console.log(coords.x)
         console.log(coords.y)
         this.reDraw();
@@ -32,7 +23,7 @@ class Canvas extends Component {
 
     reDraw = () => {
         const ctx = this.refs.myCanvas.getContext("2d");
-        this.props.tempArray.forEach((element)=>{
+        this.props.coordList.forEach((element)=>{
             console.log(element.x)
             console.log(element.y)
             ctx.fillStyle="#FF0000";

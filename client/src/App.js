@@ -7,13 +7,22 @@ import UI from './components/UI';
 
 class App extends Component {
 
+    constructor () {
+        super()
+        this.reDraw();
+    }
+
+    reDraw = () => {
+
+    }
+
     state = {
         canvasID: "newCanvas",
         coordinates: [],
 
         versions: [],
 
-        currentVersion: {}
+        currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
     };
 
   render() {
@@ -67,8 +76,11 @@ class App extends Component {
 
     handleNewClick = () => {
         console.log('New Button Clicked');
-        let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+        let currentVersion = {...this.state.currentVersion};
+        currentVersion.coordList.length = 0;
         this.setState({currentVersion});
+        this.refs.myUI.refs.myCanvas.reDraw()
+        console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
     }
 }
