@@ -98,16 +98,6 @@ class App extends Component {
         this.refs.myUI.reDraw();
 
     }
-
-    handleNameChange = event => {
-        let name = event.target.value;
-        let currentVersion = {_id: null, name: name, coordList: [], avgPoint: null, point1: null, point2: null};
-        this.setState({currentVersion});
-    }
-
-    // reDraw = () => {
-    //     this.refs.myUI.reDraw();
-    // }
 }
 
 export default App;
