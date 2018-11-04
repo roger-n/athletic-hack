@@ -8,7 +8,7 @@ class UI extends Component {
 
     constructor () {
         super()
-        this.reDraw();
+        this.myCanvas = React.createRef();
     }
 
     reDraw = () => {
@@ -45,12 +45,16 @@ class UI extends Component {
                     </button>
                 </div>
                 <div className="CanvasPart">
-                    <Canvas coordList={this.props.currentVersion.coordList}/>
+                    <Canvas ref="myCanvas" coordList={this.props.currentVersion.coordList}/>
                 </div>
             </div>
         );
     }
 
+    reDraw = () => {
+        console.log('trying to redraw from UI')
+        this.refs.myCanvas.reDraw();
+    }
 }
 
 export default UI;
