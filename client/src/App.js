@@ -61,7 +61,7 @@ class App extends Component {
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Help');
-        axios.post('localhost:5000/save', name, tempCoords)
+        axios.post('http://localhost:5000/save', name, tempCoords)
             .then(()=>{console.log("Posted to server")
         });
         //Push to database a new JSON with name and tempCoords
