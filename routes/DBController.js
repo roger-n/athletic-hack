@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const math = require('mathjs');
 const playerSchema= mongoose.Schema({
-    _id: mongoose.Schema.ObjectId
-    ,name: {
-        require:true,
+    name: {
+        required:true,
         type:String
     }
     ,coordList:[{
@@ -21,28 +20,44 @@ const playerSchema= mongoose.Schema({
         point2:{
             x:Number,
             y:Number
-        }
+        },
+    radius:Number
 });
 let Player = mongoose.model('PlayerData',playerSchema,'playerdatas');
 
 
 
 function updateData(id) {
-    Player.findOne({_id: id}).exec((results) => {
+    Player.findById(id.toString()).exec((err,results)=>{
         results.avgPoint = getAvgPoint(results.coordList);
+        console.log("RESULTS AVGPOINT SHOULD BE:",results.avgPoint);
         let length = getStandardDev(results.coordList);
         let radius = findRadius(results.avgPoint);
-        let a = getA(radius,length);
-        let b = getB(radius,a);
-
-        results.point1=getPoint1(a,results.avgPoint.x,radius,b,results.avgPoint.y);
-        results.point2=getPoint2(a,results.avgPoint.x,radius,b,results.avgPoint.y);
+        let a = getA(radius, length);
+        let b = getB(radius, a);
+        results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+        results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+        results.radius = radius
         return results.save()
+    })/*.catch((err)=>{console.log(err)})*/
+    /*.exec((err,results) => {
+        if(err)
+            return null;
+        else {
+            results.avgPoint = getAvgPoint(results.coordList);
+            let length = getStandardDev(results.coordList);
+            let radius = findRadius(results.avgPoint);
+            let a = getA(radius, length);
+            let b = getB(radius, a);
+            results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+            results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
+            return results.save()
+        }*/
 
-    })
-}
+    }
 
-/*Player.find().limit(1).exec(function(err, dbUsers) {
+
+Player.find().limit(1).exec(function(err, dbUsers) {
     // Only insert into DB if there are no users yet
     if (! dbUsers.length) {
         var users = require('./players.json').map(function(user) {
@@ -56,7 +71,7 @@ function updateData(id) {
             }
         });
     }
-});*/
+});
 
 function getAvgPoint(coords) {
     let avgX = 0;
@@ -68,16 +83,18 @@ function getAvgPoint(coords) {
                 });
                 avgX/=coords.length;
                 avgY/=coords.length;
-                return {avgX,avgY}
+                console.log("Average Coords",avgX,avgY);
+                return {"x":avgX,"y":avgY}
 
 }
 //Helper functions
 function findRadius(coords){
-    return Math.sqrt(Math.pow(coords.x,2)+Math.power(coords.y,2))
+    return Math.sqrt(Math.pow(coords.x,2)+Math.pow(coords.y,2))
 }
 
 function getStandardDev(coordsList){
-    return math.std(coordsList.x,coordsList.y);
+    return math.std(coordsList.map(element=> (element.x)
+    ),coordsList.map(element=>(element.y)))
 }
 
 function getA(radius, length){
@@ -93,13 +110,17 @@ function getPoint1(a,c,r,b,d){
     let x =(a*(c/r)-(b*(d/r)));
     let y = ((a*(d/r))+(b*(c/r)));
 
-    return {x,y}
+    return {"x":x,"y":y}
 }
 
 function getPoint2(a,c,r,b,d){
     let x =(a*(c/r)+(b*(d/r)));
     let y = ((a*(d/r))-(b*(c/r)));
 
-    return {x,y}
+    return {"x":x,"y":y}
 }
-module.exports = {Player, updateData};
+function makeId()
+{
+    return mongoose.Types.ObjectId.toString()
+}
+module.exports = {Player, updateData,makeId};

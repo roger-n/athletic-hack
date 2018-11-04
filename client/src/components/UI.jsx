@@ -15,7 +15,9 @@ class UI extends Component {
         this.myCanvas = React.createRef();
     }
 
+
     render () {
+
         return (
             <div className="UI">
                 <div className="Top-part">
