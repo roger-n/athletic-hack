@@ -14,8 +14,9 @@ router.post('/save',(req,res)=>{
     });
 
 
-    newPlayer.save().then(()=>{
+    newPlayer.save().then((results)=>{
         console.log("Successfully saved player")
+        DBController.updateData(results._id)
         res.send("Saved")
     })
 });
