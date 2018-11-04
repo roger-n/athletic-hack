@@ -10,29 +10,9 @@ class App extends Component {
     state = {
         canvasID: "newCanvas",
         coordinates: [],
-        versions: [
-            { id: 0,
-                name: 'John Doe',
-                coordList: [ { x: 1, y: 3 }, { x: 2, y: 4 } ],
-                avgPoint: {x: 2, y: 3},
-                point1: {x: 6, y: 4},
-                point2: {x: 8, y: 4}
-                },
-            { id: 1,
-                name: 'Hailee Peterson',
-                coordList: [ { x: 3, y: 8 }, { x: 1, y: 9 } ],
-                avgPoint: {x: 2, y: 3},
-                point1: {x: 6, y: 4},
-                point2: {x: 8, y: 4} },
-            { id: 2,
-                name: 'Training Dummy',
-                coordList: [ { x: 1, y: 6 }, { x: 6, y: 4 } ],
-                avgPoint: {x: 2, y: 3},
-                point1: {x: 6, y: 4},
-                point2: {x: 8, y: 4} },
-        ],
-        currentVersion: this.versions[1]
-    }
+
+        versions: []
+    };
 
   render() {
     return (
@@ -55,8 +35,9 @@ class App extends Component {
   }
 
     handleVersionClick = versionID => {
-        const versions = this.state.versions.filter(v => v.id !== versionID);
-        this.setState({ versions })
+      console.log("Handling Version Click");
+      const versions = this.state.versions.filter(v => v._id !== versionID);
+      this.setState({ versions })
         //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
     };
 
@@ -65,8 +46,15 @@ class App extends Component {
         axios.post('http://localhost:5000/save', name, tempCoords)
             .then(()=>{console.log("Posted to server")
         });
+
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
+
+        axios.get('http://localhost:5000/players')
+            .then(results => {
+                this.setState( {versions: results.data} )
+                }
+            )
     };
 }
 
