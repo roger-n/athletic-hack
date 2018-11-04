@@ -6,35 +6,37 @@ import Canvas from './Canvas'
 
 class UI extends Component {
 
+    state = {
+        localName: ''
+    }
 
     constructor () {
-        super()
-            this.myCanvas = React.createRef();
+        super();
+        this.myCanvas = React.createRef();
     }
 
     render () {
-
-        console.log(this.props);
-
+        
         return (
             <div className="UI">
                 <div className="Top-part">
                     {/*Save Button*/}
                     <button
                         className="btn btn-primary m-2"
-                        onClick={() => (this.props.onSaveClick(this.props.currentVersion.name, this.props.currentVersion.coordList))}>
+                        onClick={() => (this.props.onSaveClick(this.state.localName, this.props.currentVersion.coordList))}>
                         Submit
                     </button>
 
                     {/*When field state changes, change name*/}
                     <div className="input-group m-2">
                         <input
-                            value={this.props.currentVersion.name}
+                            value={this.state.localName}
                             type="text"
                             className="form-control"
                             placeholder="New Player Name"
                             aria-label="Username"
-                            aria-describedby="basic-addon1"/>
+                            aria-describedby="basic-addon1"
+                            onChange={this.updateInputValue}/>
                     </div>
                     {/*Testing button click to to function*/}
                     <button
@@ -49,6 +51,13 @@ class UI extends Component {
             </div>
         );
     }
+
+    updateInputValue = (evt) => {
+        this.setState({
+            localName: evt.target.value
+        });
+    }
+
 
     reDraw = () => {
         console.log('trying to redraw from UI')
