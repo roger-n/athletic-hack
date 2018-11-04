@@ -21,7 +21,15 @@ class UI extends Component {
     }
 
     componentDidMount() {
-        if (isEmptythis.props.currentVersion)
+        if (props.currentVersion==null){
+            console.log('remounted UI');
+            let newState = {...this.state};
+            if (this.props.currentVersion == null) {
+                newState.tempArray = [];
+            } else {
+                newState.tempArray = this.props.currentVersion.coordinates;
+            }
+        }
     }
 
     render () {
