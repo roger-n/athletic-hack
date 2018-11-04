@@ -43,16 +43,16 @@ class App extends Component {
           <h1 className="App-title">Athletic Hack</h1>
         </header>
         <div className="App-div">
-            <div className="Version-table">
-                <VersionTable onVersionClick={this.handleVersionClick}
-                              onDeleteClick={this.handleDeleteClick}
-                              versions={this.state.versions}/>
-            </div>
             <div className="UI">
                 <UI ref="myUI"
                     onSaveClick={this.handleSaveClick}
                     onNewClick = {this.handleNewClick}
                     currentVersion = {this.state.currentVersion}/>
+            </div>
+            <div className="Version-table">
+                <VersionTable onVersionClick={this.handleVersionClick}
+                              onDeleteClick={this.handleDeleteClick}
+                              versions={this.state.versions}/>
             </div>
         </div>
       </div>

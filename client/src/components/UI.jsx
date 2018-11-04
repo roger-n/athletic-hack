@@ -23,13 +23,13 @@ class UI extends Component {
                 <div className="Top-part">
                     {/*Save Button*/}
                     <button
-                        className="btn btn-primary m-2"
+                        className="btn btn-primary m-2 btn-lg"
                         onClick={() => (this.props.onSaveClick(this.state.localName, this.props.currentVersion.coordList))}>
                         Submit
                     </button>
 
                     {/*When field state changes, change name*/}
-                    <div className="input-group m-2">
+                    <div className="input-group m-2 input-group-lg">
                         <input
                             value={this.state.localName}
                             type="text"
@@ -41,7 +41,7 @@ class UI extends Component {
                     </div>
                     {/*Testing button click to to function*/}
                     <button
-                        className="btn btn-success m-2"
+                        className="btn btn-success m-2 btn-lg"
                         onClick={() => this.props.onNewClick()}>
                         Clear
                     </button>
