@@ -13,7 +13,7 @@ class App extends Component {
 
         versions: [],
 
-        currentVersion: {}
+        currentVersion: null
     };
 
   render() {
@@ -29,7 +29,9 @@ class App extends Component {
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
-                <UI onSaveClick={this.handleSaveClick} onNewClick = {this.handleNewClick}/>
+                <UI onSaveClick={this.handleSaveClick}
+                    onNewClick = {this.handleNewClick}
+                    currentVersion = {this.state.currentVersion}/>
             </div>
         </div>
       </div>
