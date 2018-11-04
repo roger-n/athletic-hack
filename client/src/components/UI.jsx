@@ -36,7 +36,7 @@ class UI extends Component {
                     {/*Testing button click to to function*/}
                     <button
                         className="btn btn-success m-2"
-                        onClick={() => (this.props.onNewClick())}>
+                        onClick={this.handleNewClick}>
                         New Data Set
                     </button>
                 </div>
@@ -45,6 +45,15 @@ class UI extends Component {
                 </div>
             </div>
         );
+    }
+
+    handleNewClick = () => {
+        console.log('Handling New Click in UI');
+        let newState = {...this.state};
+        newState.tempArray = [];
+        this.setState(newState);
+        console.log(this.state.tempArray);
+        this.props.onNewClick()
     }
 
     handleChange = (e) => {
