@@ -37,7 +37,7 @@ function updateData(id) {
         let b = getB(radius, a);
         results.point1 = getPoint1(a, results.avgPoint.x, radius, b, results.avgPoint.y);
         results.point2 = getPoint2(a, results.avgPoint.x, radius, b, results.avgPoint.y);
-        results.stdDeviation = length;
+        results.stdDeviation = length*2;
         return results.save()
     })/*.catch((err)=>{console.log(err)})*/
     /*.exec((err,results) => {
