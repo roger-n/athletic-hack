@@ -8,11 +8,9 @@ import UI from './components/UI';
 class App extends Component {
 
   state = {
-      canvasID: "newCanvas",
-
+      canvasID: "",
       versions: [],
-
-      currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
+      currentVersion: {}
   };
 
   constructor () {
@@ -22,16 +20,18 @@ class App extends Component {
 
   componentDidMount() {
 
+      console.log('Component Mounted');
+
       let canvasID = "newCanvas";
-      this.setState({canvasID})
+      this.setState({canvasID});
 
       axios.get('http://localhost:5000/players')
           .then(results => {
                   this.setState( {versions: results.data} )
               }
-          )
+          );
 
-      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null, radius: null};
       this.setState({currentVersion})
   }
 
@@ -68,7 +68,7 @@ class App extends Component {
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
         console.log(name)
-        console.log(tempCoords)
+        //console.log(tempCoords)
       
         axios.post('http://localhost:5000/save', {
             name: name,
@@ -76,19 +76,18 @@ class App extends Component {
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
-                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null, radius: null};
                 this.setState(newState);
                 this.refs.myUI.reDraw();
-        });
+                axios.get('http://localhost:5000/players')
+                    .then(results => {
+                            this.setState( {versions: results.data} )
+                        }
+                    )})
 
         //Push to database a new JSON with name and tempCoords
         //Set top level state to database get-all request
 
-        axios.get('http://localhost:5000/players')
-            .then(results => {
-                this.setState( {versions: results.data} )
-                }
-            )
     };
 
     handleNewClick = () => {
@@ -96,15 +95,10 @@ class App extends Component {
         let currentVersion = {...this.state.currentVersion};
         currentVersion.coordList.length = 0;
         this.setState({currentVersion});
-        console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
         this.refs.myUI.reDraw();
 
     }
-
-    // reDraw = () => {
-    //     this.refs.myUI.reDraw();
-    // }
 }
 
 export default App;
