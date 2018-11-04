@@ -71,7 +71,7 @@ class App extends Component {
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
-                newState.currentVersion = null;
+                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
                 this.setState(newState);
         });
 
