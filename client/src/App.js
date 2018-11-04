@@ -49,7 +49,7 @@ class App extends Component {
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
-                newState.currentVersion = {name: name, coordinates: tempCoords};
+                newState.currentVersion = null;
                 this.setState(newState);
         });
 
