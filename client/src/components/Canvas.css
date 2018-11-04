@@ -1,0 +1,17 @@
+body{background: #f2f6f8;}
+
+.img{position:absolute;z-index:1;}
+
+.container {
+    display: block;
+    width: 435px;
+    height: 415px;
+    position: relative;
+    border: 1px solid black;
+    background: WHITE;
+}
+
+.gameCanvas{
+    position:relative;
+    z-index:20;
+}

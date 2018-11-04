@@ -10,6 +10,7 @@ class App extends Component {
     state = {
         canvasID: "newCanvas",
         coordinates: [],
+
         versions: []
     };
 
@@ -41,7 +42,7 @@ class App extends Component {
     };
 
     handleSaveClick = (name, tempCoords) => {
-        console.log('Help');
+        console.log('Save button clicked');
         axios.post('http://localhost:5000/save', name, tempCoords)
             .then(()=>{console.log("Posted to server")
         });

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import './UI.css';
+import Canvas from './Canvas'
 
 
 class UI extends Component {
@@ -49,9 +50,7 @@ class UI extends Component {
                     />
                 </div>
                 <div className="CanvasPart">
-                    <div>
-
-                    </div>
+                    <Canvas tempArray={this.state.tempArray}/>
                 </div>
             </div>
         );
