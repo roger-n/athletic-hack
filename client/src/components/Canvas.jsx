@@ -21,7 +21,8 @@ class Canvas extends Component {
         this.reDraw();
     };
 
-    reDraw = () => {
+    reDraw() {
+        console.log('Redrawing');
         const ctx = this.refs.myCanvas.getContext("2d");
         this.props.coordList.forEach((element)=>{
             console.log(element.x)

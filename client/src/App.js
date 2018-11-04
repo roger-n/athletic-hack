@@ -7,15 +7,6 @@ import UI from './components/UI';
 
 class App extends Component {
 
-    constructor () {
-        super()
-        this.reDraw();
-    }
-
-    reDraw = () => {
-
-    }
-
     state = {
         canvasID: "newCanvas",
         coordinates: [],
@@ -78,8 +69,8 @@ class App extends Component {
         console.log('New Button Clicked');
         let currentVersion = {...this.state.currentVersion};
         currentVersion.coordList.length = 0;
+        this.reDraw();
         this.setState({currentVersion});
-        this.refs.myUI.refs.myCanvas.reDraw()
         console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
     }

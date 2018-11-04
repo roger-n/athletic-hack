@@ -6,15 +6,6 @@ import Canvas from './Canvas'
 
 class UI extends Component {
 
-    constructor () {
-        super()
-        this.reDraw();
-    }
-
-    reDraw = () => {
-
-    }
-
     render () {
 
         return (
