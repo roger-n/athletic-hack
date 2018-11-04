@@ -20,21 +20,8 @@ class UI extends Component {
         ]
     }
 
-<<<<<<< HEAD
-    componentDidMount() {
-        if (props.currentVersion==null){
-            console.log('remounted UI');
-            let newState = {...this.state};
-            if (this.props.currentVersion == null) {
-                newState.tempArray = [];
-            } else {
-                newState.tempArray = this.props.currentVersion.coordinates;
-            }
-        }
-    }
-=======
 
->>>>>>> 41185a5ab2d7fa44a32b9a4ebfeb2ac4d6b558eb
+
 
     render () {
         return (

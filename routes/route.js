@@ -8,12 +8,11 @@ router.get('/',(req,res)=>
 });
 
 router.post('/save',(req,res)=>{
-    let newPlayer = new DBController.Player({
-        _id:DBController.makeId(),
-
+   let newPlayer = new DBController.Player({
+       name: req.body.name,
+       coordList: req.body.coordsList
     });
 
-  console.log(req.body);
 
     newPlayer.save().then(()=>{
         console.log("Successfully saved player")
@@ -28,10 +27,9 @@ router.get('/players',(req,res)=>{
 });
 
 router.get('/players/:id',(req,res)=>{
-    DBController.Player.findOne({_id:id}).exec((err,results)=>{
-        res.send(results)
-    })
-    }
-);
+    DBController.updateData(req.params.id)
+    res.send("SHIT")
+    });
+
 
 module.exports = router;
