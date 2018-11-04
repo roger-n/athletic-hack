@@ -7,14 +7,33 @@ import UI from './components/UI';
 
 class App extends Component {
 
-    state = {
-        canvasID: "newCanvas",
-        coordinates: [],
+  state = {
+      canvasID: "newCanvas",
 
-        versions: [],
+      versions: [],
 
-        currentVersion: {}
-    };
+      currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
+  };
+
+  constructor () {
+        super()
+        this.myUI = React.createRef();
+  }
+
+  componentDidMount() {
+
+      let canvasID = "newCanvas";
+      this.setState({canvasID})
+
+      axios.get('http://localhost:5000/players')
+          .then(results => {
+                  this.setState( {versions: results.data} )
+              }
+          )
+
+      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+      this.setState({currentVersion})
+  }
 
   render() {
     return (
@@ -29,7 +48,10 @@ class App extends Component {
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
-                <UI onSaveClick={this.handleSaveClick} onNewClick = {this.handleNewClick}/>
+                <UI ref="myUI"
+                    onSaveClick={this.handleSaveClick}
+                    onNewClick = {this.handleNewClick}
+                    currentVersion = {this.state.currentVersion}/>
             </div>
         </div>
       </div>
@@ -45,13 +67,16 @@ class App extends Component {
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
+        console.log(name)
+        console.log(tempCoords)
+      
         axios.post('http://localhost:5000/save', {
             name: name,
             coordsList:tempCoords})
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
-                newState.currentVersion = null;
+                newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
                 this.setState(newState);
         });
 
@@ -67,11 +92,18 @@ class App extends Component {
 
     handleNewClick = () => {
         console.log('New Button Clicked');
-        let newState = {...this.state};
-        newState.currentVersion = null;
-        this.setState(newState);
-        console.log('currentState set to null object');
+        let currentVersion = {...this.state.currentVersion};
+        currentVersion.coordList.length = 0;
+        this.setState({currentVersion});
+        console.log(this.state.currentVersion);
+        console.log('currentVersion objects set to null');
+        this.refs.myUI.reDraw();
+
     }
+
+    // reDraw = () => {
+    //     this.refs.myUI.reDraw();
+    // }
 }
 
 export default App;
