@@ -7,20 +7,33 @@ import UI from './components/UI';
 
 class App extends Component {
 
-    constructor () {
+  state = {
+      canvasID: "newCanvas",
+
+      versions: [],
+
+      currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
+  };
+
+  constructor () {
         super()
         this.myUI = React.createRef();
-    }
-    
+  }
 
-    state = {
-        canvasID: "newCanvas",
-        coordinates: [],
+  componentDidMount() {
 
-        versions: [],
+      let canvasID = "newCanvas";
+      this.setState({canvasID})
 
-        currentVersion: {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null}
-    };
+      axios.get('http://localhost:5000/players')
+          .then(results => {
+                  this.setState( {versions: results.data} )
+              }
+          )
+
+      let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
+      this.setState({currentVersion})
+  }
 
   render() {
     return (
