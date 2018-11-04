@@ -69,6 +69,7 @@ class App extends Component {
         console.log('New Button Clicked');
         let currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
         this.setState({currentVersion});
+        console.log(this.state.currentVersion)
         console.log('currentVersion objects set to null');
     }
 }

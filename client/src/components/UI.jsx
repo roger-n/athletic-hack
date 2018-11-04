@@ -48,12 +48,12 @@ class UI extends Component {
     }
 
     handleNewClick = () => {
+        this.props.onNewClick()
         console.log('Handling New Click in UI');
         let newState = {...this.state};
         newState.tempArray = [];
         this.setState(newState);
         console.log(this.state.tempArray);
-        this.props.onNewClick()
     }
 
     handleChange = (e) => {
