@@ -15,7 +15,9 @@ router.post('/save',(req,res)=>{
 });
 
 router.get('/players',(req,res)=>{
-    res.json(DBController.Player.find())
-});
+DBController.Player.find().exec((err,results)=>
+{
+    res.send(results)
+})});
 
 module.exports = router;
