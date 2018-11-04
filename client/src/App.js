@@ -60,9 +60,13 @@ class App extends Component {
   }
 
     handleVersionClick = versionID => {
-      console.log("Handling Version Click");
-      const versions = this.state.versions.filter(v => v._id !== versionID);
-      this.setState({ versions })
+        console.log("Handling Version Click");
+        axios.get('localhost:5000/players/' + {versionID})
+            .then(results => {
+                    this.setState( {currentVersion: results.data[0]} )
+                });
+        console.log(this.state.currentVersion)
+
         //Set current versionID in top level state to that of the one clicked, UI/canvas should update accordingly
     };
 
