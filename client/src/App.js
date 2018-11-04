@@ -69,7 +69,10 @@ class App extends Component {
         console.log('Save button clicked');
         console.log(name)
         console.log(tempCoords)
-        axios.post('http://localhost:5000/save', name, tempCoords)
+      
+        axios.post('http://localhost:5000/save', {
+            name: name,
+            coordsList:tempCoords})
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
