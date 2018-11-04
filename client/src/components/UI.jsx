@@ -6,27 +6,31 @@ import Canvas from './Canvas'
 
 class UI extends Component {
 
-    state = {
-        name: '',
-        tempArray: (this.props.currentVersion.coordList == null) ? [] : this.props.currentVersion.coordList
+    constructor () {
+        super()
+        this.reDraw();
+    }
+
+    reDraw = () => {
+
     }
 
     render () {
+
         return (
             <div className="UI">
                 <div className="Top-part">
                     {/*Save Button*/}
                     <button
                         className="btn btn-primary m-2"
-                        onClick={() => (this.props.onSaveClick(this.state.name, this.state.tempArray))}>
+                        onClick={() => (this.props.onSaveClick(this.props.currentVersion.name, this.props.currentVersion.coordList))}>
                         Submit
                     </button>
 
                     {/*When field state changes, change name*/}
                     <div className="input-group m-2">
                         <input
-                            value={this.state.name}
-                            onChange={ this.handleChange }
+                            value={this.props.currentVersion.name}
                             type="text"
                             className="form-control"
                             placeholder="New Player Name"
@@ -36,37 +40,16 @@ class UI extends Component {
                     {/*Testing button click to to function*/}
                     <button
                         className="btn btn-success m-2"
-                        onClick={this.handleNewClick}>
+                        onClick={() => this.props.onNewClick()}>
                         New Data Set
                     </button>
                 </div>
                 <div className="CanvasPart">
-                    <Canvas tempArray={this.state.tempArray}/>
+                    <Canvas coordList={this.props.currentVersion.coordList}/>
                 </div>
             </div>
         );
     }
-
-    handleNewClick = () => {
-        this.props.onNewClick()
-        console.log('Handling New Click in UI');
-        let newState = {...this.state};
-        newState.tempArray = [];
-        this.setState(newState);
-        console.log(this.state.tempArray);
-    }
-
-    handleChange = (e) => {
-        let newState = {...this.state};
-        newState.name = e.target.value;
-        this.setState(newState);
-        console.log(this.state.name);
-    }
-
-    handleClick = () => {
-        console.log(this.state.name);
-    }
-
 
 }
 
