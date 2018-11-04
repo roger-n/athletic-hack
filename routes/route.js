@@ -27,6 +27,7 @@ router.post('/delete/:id',(req,res)=>{
         res.send("Deleted")
     })
 });
+
 router.get('/players',(req,res)=>{
     DBController.Player.find().exec((err,results)=>{
         res.json(results)

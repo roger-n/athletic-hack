@@ -43,7 +43,7 @@ class UI extends Component {
                     <button
                         className="btn btn-success m-2"
                         onClick={() => this.props.onNewClick()}>
-                        New Data Set
+                        Clear
                     </button>
                 </div>
                 <div className="CanvasPart">

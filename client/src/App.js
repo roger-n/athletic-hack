@@ -76,12 +76,12 @@ class App extends Component {
         console.log('Handling Delete Click');
         console.log(versionID);
         axios.post('http://localhost:5000/delete/' + versionID)
-            .then((arg)=> {
+            .then(()=> {
                 console.log("Deleted from server");
                 axios.get('http://localhost:5000/players')
                     .then(results => {
                         this.setState( {versions: results.data} )
-                    })})
+                    }).catch(console.log)}).catch(console.log)
     };
 
     handleSaveClick = (name, tempCoords) => {
