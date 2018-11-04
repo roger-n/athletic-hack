@@ -23,14 +23,14 @@ class UI extends Component {
         return (
             <div className="UI">
                 <div className="Top-part">
-                    <!--Save button-->
+                    {/*Save Button*/}
                     <button
                         className="btn btn-primary m-2"
                         onClick={() => (this.props.onSaveClick(this.state.name, this.state.tempArray))}>
                         Submit
                     </button>
 
-                    <!--When field state changes, change name-->
+                    {/*When field state changes, change name*/}
                     <div className="input-group m-2">
                         <input
                             value={this.state.name}
@@ -41,7 +41,7 @@ class UI extends Component {
                             aria-label="Username"
                             aria-describedby="basic-addon1"/>
                     </div>
-                    <!--Testing button click to to function-->
+                    {/*Testing button click to to function*/}
                     <input
                         type="button"
                         value="Alert the text input"
