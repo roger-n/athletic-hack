@@ -30,7 +30,8 @@ class App extends Component {
                 avgPoint: {x: 2, y: 3},
                 point1: {x: 6, y: 4},
                 point2: {x: 8, y: 4} },
-        ]
+        ],
+        currentVersion: this.versions[1]
     }
 
   render() {
@@ -60,7 +61,7 @@ class App extends Component {
     };
 
     handleSaveClick = (name, tempCoords) => {
-        console.log('Help');
+        console.log('Save button clicked');
         axios.post('http://localhost:5000/save', name, tempCoords)
             .then(()=>{console.log("Posted to server")
         });
