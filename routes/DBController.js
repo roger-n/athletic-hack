@@ -57,21 +57,7 @@ function updateData(id) {
     }
 
 
-Player.find().limit(1).exec(function(err, dbUsers) {
-    // Only insert into DB if there are no users yet
-    if (! dbUsers.length) {
-        var users = require('./players.json').map(function(user) {
-            return new Player(user);
-        });
-        Player.insertMany(users, function(err) {
-            if (err) {
-                console.log('Error populating data in MongoDB', err);
-            } else {
-                console.log('MongoDB initialized successfully.');
-            }
-        });
-    }
-});
+
 
 function getAvgPoint(coords) {
     let avgX = 0;
