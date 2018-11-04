@@ -8,26 +8,7 @@ class UI extends Component {
 
     state = {
         name: '',
-        tempArray: [
-            // {x: 0.5, y: 0.8},
-            // {x: 0.6, y: 0.3},
-            // {x: 0.4, y: 0.6},
-            // {x: 0.5, y: 0.2},
-            // {x: 0.2, y: 0.3},
-            // {x: 0.7, y: 0.4},
-            // {x: 0.5, y: 0.2},
-            // {x: 0.3, y: 0.7},
-        ]
-    }
-
-    componentDidMount() {
-        console.log('remounted UI');
-        let newState = {...this.state};
-        if (this.props.currentVersion == null) {
-            newState.tempArray = [];
-        } else {
-            newState.tempArray = this.props.currentVersion.coordinates;
-        }
+        tempArray: (this.props.currentVersion.coordList == null) ? [] : this.props.currentVersion.coordList
     }
 
     render () {
@@ -55,7 +36,7 @@ class UI extends Component {
                     {/*Testing button click to to function*/}
                     <button
                         className="btn btn-success m-2"
-                        onClick={() => (this.props.onNewClick())}>
+                        onClick={this.handleNewClick}>
                         New Data Set
                     </button>
                 </div>
@@ -64,6 +45,15 @@ class UI extends Component {
                 </div>
             </div>
         );
+    }
+
+    handleNewClick = () => {
+        console.log('Handling New Click in UI');
+        let newState = {...this.state};
+        newState.tempArray = [];
+        this.setState(newState);
+        console.log(this.state.tempArray);
+        this.props.onNewClick()
     }
 
     handleChange = (e) => {
