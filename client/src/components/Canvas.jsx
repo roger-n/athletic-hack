@@ -171,9 +171,9 @@ class Canvas extends Component {
         ctx5.lineWidth="8px";
 
         ctx5.fillRect(avgX * canvasSize,
-                0.47 * canvasSize,
+                0.40 * canvasSize,
                 10,10);
-        ctx5.fillRect(0.5 * canvasSize,
+        ctx5.fillRect(0.56 * canvasSize,
                 (1- avgY) * canvasSize,
                 10,10);
 
