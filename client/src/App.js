@@ -11,7 +11,9 @@ class App extends Component {
         canvasID: "newCanvas",
         coordinates: [],
 
-        versions: []
+        versions: [],
+
+        currentVersion: {}
     };
 
   render() {
@@ -27,7 +29,7 @@ class App extends Component {
                               versions={this.state.versions}/>
             </div>
             <div className="UI">
-                <UI onSaveClick={this.handleSaveClick}/>
+                <UI onSaveClick={this.handleSaveClick} onNewClick = {this.handleNewClick}/>
             </div>
         </div>
       </div>
@@ -44,7 +46,11 @@ class App extends Component {
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
         axios.post('http://localhost:5000/save', name, tempCoords)
-            .then(()=>{console.log("Posted to server")
+            .then(()=>{
+                console.log("Posted to server");
+                let newState = {...this.state};
+                newState.currentVersion = {name: name, coordinates: tempCoords};
+                this.setState(newState);
         });
 
         //Push to database a new JSON with name and tempCoords
@@ -56,6 +62,14 @@ class App extends Component {
                 }
             )
     };
+
+    handleNewClick = () => {
+        console.log('New Button Clicked');
+        let newState = {...this.state};
+        newState.currentVersion = null;
+        this.setState(newState);
+        console.log('currentState set to null object');
+    }
 }
 
 export default App;
