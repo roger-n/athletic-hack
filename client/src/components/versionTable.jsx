@@ -7,7 +7,6 @@ class VersionTable extends Component {
         console.log('Rendering Version Table');
         console.log(this.props.versions);
         let { versions } = this.props;
-        versions = versions.reverse();
         return (
             <div>
                 {versions.map(version => (
