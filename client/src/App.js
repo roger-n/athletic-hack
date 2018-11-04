@@ -51,6 +51,7 @@ class App extends Component {
                 <UI ref="myUI"
                     onSaveClick={this.handleSaveClick}
                     onNewClick = {this.handleNewClick}
+                    onNameChange = {this.handleNameChange()}
                     currentVersion = {this.state.currentVersion}/>
             </div>
         </div>
@@ -67,12 +68,15 @@ class App extends Component {
 
     handleSaveClick = (name, tempCoords) => {
         console.log('Save button clicked');
+        console.log(name);
+        console.log(tempCoords);
         axios.post('http://localhost:5000/save', name, tempCoords)
             .then(()=>{
                 console.log("Posted to server");
                 let newState = {...this.state};
                 newState.currentVersion = {_id: null, name: null, coordList: [], avgPoint: null, point1: null, point2: null};
                 this.setState(newState);
+                this.refs.myUI.reDraw();
         });
 
         //Push to database a new JSON with name and tempCoords
@@ -90,10 +94,15 @@ class App extends Component {
         let currentVersion = {...this.state.currentVersion};
         currentVersion.coordList.length = 0;
         this.setState({currentVersion});
-        console.log(this.state.currentVersion);
         console.log('currentVersion objects set to null');
         this.refs.myUI.reDraw();
 
+    }
+
+    handleNameChange = event => {
+        let name = event.target.value;
+        let currentVersion = {_id: null, name: name, coordList: [], avgPoint: null, point1: null, point2: null};
+        this.setState({currentVersion});
     }
 
     // reDraw = () => {

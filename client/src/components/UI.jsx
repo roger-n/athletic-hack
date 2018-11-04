@@ -26,7 +26,7 @@ class UI extends Component {
                     {/*When field state changes, change name*/}
                     <div className="input-group m-2">
                         <input
-                            value={this.props.currentVersion.name}
+                            onChange={() => this.props.onNameChange()}
                             type="text"
                             className="form-control"
                             placeholder="New Player Name"
