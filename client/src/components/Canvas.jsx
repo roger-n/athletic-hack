@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Canvas.css";
 
+const canvasSize = 500;
+
 class Canvas extends Component {
 
     constructor () {
@@ -11,10 +13,10 @@ class Canvas extends Component {
     handleClick = (evt) => {
         console.log("Canvas clicked");
         let coords = this.getMousePos(evt)
-        coords.x = coords.x / 400
-        coords.y = (400 - coords.y) / 400
+        coords.x = coords.x / canvasSize
+        coords.y = (canvasSize - coords.y) / canvasSize
         //TODO make this do stuff with DB
-        //console.log(this.props);
+        //console.log(this.pros);
         this.props.coordList.push({x: coords.x, y: coords.y})
         //console.log(coords.x)
         //console.log(coords.y)
@@ -31,7 +33,7 @@ class Canvas extends Component {
             //console.log(element.x)
             //console.log(element.y)
             ctx.fillStyle="#FF0000";
-            ctx.fillRect(element.x * 400, (1 - element.y) * 400,6,6);
+            ctx.fillRect(element.x * canvasSize, (1 - element.y) * canvasSize,6,6);
         })
     }
 
@@ -47,36 +49,38 @@ class Canvas extends Component {
             //console.log(element.x)
             //console.log(element.y)
             ctx.fillStyle="#FF0000";
-            ctx.fillRect(element.x * 400, (1 - element.y) * 400,6,6);
+            ctx.fillRect(element.x * canvasSize, (1 - element.y) * canvasSize,6,6);
         })
 
         setTimeout(() => {
             console.log('trying to add data')
             ctx2.fillStyle="#0000FF";
+            ctx2.strokeStyle="#4B0082\t ";
+            ctx2.lineWidth="8px"
 
-            ctx2.fillRect(this.props.currentVersion.avgPoint.x * 400,
-                (1 - this.props.currentVersion.avgPoint.y) * 400,
-                6,6);
-            ctx2.fillRect(this.props.currentVersion.point1.x * 400,
-                (1 - this.props.currentVersion.point1.y) * 400,
-                6,6);
-            ctx2.fillRect(this.props.currentVersion.point2.x * 400,
-                (1 - this.props.currentVersion.point2.y) * 400,
-                6,6);
+            ctx2.fillRect(this.props.currentVersion.avgPoint.x * canvasSize,
+                (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
+                10,10);
+            ctx2.fillRect(this.props.currentVersion.point1.x * canvasSize,
+                (1 - this.props.currentVersion.point1.y) * canvasSize,
+                10,10);
+            ctx2.fillRect(this.props.currentVersion.point2.x * canvasSize,
+                (1 - this.props.currentVersion.point2.y) * canvasSize,
+                10,10);
             ctx2.beginPath();
-            ctx2.arc(this.props.currentVersion.avgPoint.x * 400,
-                (1 - this.props.currentVersion.avgPoint.y) * 400,
-                this.props.currentVersion.radius * 400,
+            ctx2.arc(this.props.currentVersion.avgPoint.x * canvasSize,
+                (1 - this.props.currentVersion.avgPoint.y) * canvasSize,
+                this.props.currentVersion.stdDeviation / 2 * canvasSize,
                 0,
                 2*Math.PI)
-            ctx2.arc(0 * 400,
-                (1 ) * 400,
-                Math.sqrt(
-                    Math.pow(this.props.currentVersion.avgPoint.x, 2) +
-                    Math.pow(this.props.currentVersion.avgPoint.y, 2)
-                ) * 400,
-                0,
-                2 *Math.PI)
+            // ctx2.arc(0 * 400,
+            //     (1 ) * 400,
+            //     Math.sqrt(
+            //         Math.pow(this.props.currentVersion.avgPoint.x, 2) +
+            //         Math.pow(this.props.currentVersion.avgPoint.y, 2)
+            //     ) * 400,
+            //     0,
+            //     2 *Math.PI)
             ctx2.stroke();
         }, 500)
 
@@ -100,15 +104,15 @@ class Canvas extends Component {
                         className="img"
                         src="https://i.imgur.com/Xxighhh.png"
                         alt=""
-                        width="400"
-                        height="400"
+                        width={canvasSize}
+                        height={canvasSize}
                     />
 
                     <canvas
                         ref="myCanvas"
                         className="gameCanvas"
-                        width="400"
-                        height="400"
+                        width={canvasSize}
+                        height={canvasSize}
                         onClick={this.handleClick}
                     />
                 </div>
